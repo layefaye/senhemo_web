@@ -1,0 +1,28 @@
+<h1 class="text-dark fw-bold text-uppercase" mat-dialog-title>D&eacute;tails Donneur</h1>
+<hr>
+<div mat-dialog-content>
+    <div class="text-center mb-2">
+        <img src="assets/user.png" class="rounded img-fluid img-thumbnail">
+    </div>
+    <hr>
+    <p class="text-uppercase fw-bold">{{ data.firstName }} {{ data.lastName }}</p>
+    <hr>
+    <p><strong><mat-icon>mail</mat-icon> </strong> <span class="text-danger fw-bold">{{ data.email }}</span></p>
+    <hr>
+    <p><strong><mat-icon>phone</mat-icon></strong> {{ data.phoneNumber }}</p>
+    <hr>
+    <p><strong><mat-icon>address</mat-icon></strong> {{ data.address }}</p>
+    <hr>
+    <p><strong>Groupe Sanguin: <span class="text-danger">{{ data.bloodGroup }}</span></strong> </p>
+    <hr>
+    <p><strong>Peu faire un don ?:</strong> {{ data.canGive ? 'Oui, il/elle peut donner' : 'Non, il/elle ne peut pas donner' }}</p>
+    <hr>
+    <p><strong>Sex:</strong> <mat-icon *ngIf="data.sex === 'MAN'">man</mat-icon> <mat-icon *ngIf="data.sex === 'WOMAN'">woman</mat-icon>
+    <hr>
+    <p><strong>Status: </strong> <strong class="fw-bold text-{{data.status ? 'success':'danger'}}">{{ data.status ? 'Active' : 'Inactive' }}</strong></p>
+    
+</div>
+<div mat-dialog-actions class="center">
+    <button  mat-button (click)="onCancel()">Fermer</button>
+    <button color="warn" (click)="showDonate(data)" mat-button>voir dons</button>
+</div>

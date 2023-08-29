@@ -1,0 +1,25 @@
+<mat-dialog-content>
+<h2 class="text-uppercase" >detail Don</h2>
+<div>
+    <hr>
+    <p><mat-icon class="text-danger">description</mat-icon> {{ data.description }}</p>
+    <hr>
+    <p><mat-icon class="text-danger">bloodtype</mat-icon> {{ data.bloodGroup }}</p>
+    <hr>
+    <p> <mat-icon class="text-danger">date_ranger</mat-icon> {{ data.date | date:'medium' }}</p>
+    <hr>
+    <p><mat-icon class="text-danger">linear_scale</mat-icon> {{ data.quantity }} ml</p>
+    <hr>
+    <div>
+        <h6 >{{ data.bank.name }}</h6>
+        <p><mat-icon class="text-danger">description</mat-icon> {{ data.bank.description }}</p>
+        <p><strong>Status: </strong> <strong class="fw-bold text-{{data.status ? 'success':'danger'}}">{{ data.status ? 'Active' : 'Inactive' }}</strong></p>
+        <!-- Display other details as needed -->
+      </div>
+      
+  </div>
+  
+</mat-dialog-content>
+<div mat-dialog-actions class="center">
+    <button  mat-button (click)="onCancel()">Fermer</button>
+</div>

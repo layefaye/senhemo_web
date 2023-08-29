@@ -1,0 +1,57 @@
+<div class="cotainer-fluid bg-dark text-white p-3">
+    <h1>SEN<span class="text-danger">HEMO</span>,</h1>
+    <p><small><i>Faite un don, sauver trois vies</i></small></p>
+    <!-- <img src="assets/logo.ico" class="rounded float-left"> -->
+</div>
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <img src="assets/logo.ico" class="rounded img-fluid">
+        </div>
+        <div class="col-sm-6">
+            <mat-card>
+
+                <mat-card-content>
+                    <p class="text-center fw-bold text-uppercase">Authentification</p>
+                    <form class="example-form" (submit)="login()">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Mail</mat-label>
+                            <input type="email" [formControl]="email" matInput placeholder="Ex. pat@example.com">
+                            <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                                Veuillez renseigner un mail valide
+                            </mat-error>
+                            <mat-error *ngIf="password.hasError('required')">
+                                Mail <strong>requis</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width mt-1">
+                            <mat-label>Mot de passe</mat-label>
+                            <input type="password" [formControl]="password" matInput placeholder="Mot de passe">
+                            <mat-error *ngIf="password.hasError('required')">
+                                Mot de passe <strong>requis</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <p class="text-center mt-2">
+                            <button *ngIf="isLoading" class="btn btn-danger btn-sm disabled">
+                                Se connecter
+                                <div class="spinner-border mb-1" style="width: 3px; height: 3px;" role="status">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </button>
+                            <button *ngIf="!isLoading" class="btn btn-danger btn-sm">Se connecter
+                                
+                            </button>
+                        </p>
+                    </form>
+                </mat-card-content>
+                <mat-card-footer>
+
+                </mat-card-footer>
+            </mat-card>
+        </div>
+
+    </div>
+
+
+</div>

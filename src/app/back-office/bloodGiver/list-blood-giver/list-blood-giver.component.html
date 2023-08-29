@@ -1,0 +1,79 @@
+<app-nav></app-nav>
+<div *ngIf="!isLoading" class="container mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <h6 class="text-uppercase" *ngIf="type === 'all'">
+                liste donneurs ({{bloodGivers.length}})
+            </h6>
+        </div>
+        <div class="col-sm-6 text-end">
+            <button mat-button (click)="showMap(bloodGivers)" ><mat-icon class="text-danger">map</mat-icon> Map</button>
+        </div>
+    </div>
+    <h6 class="text-uppercase" *ngIf="type === 'disable'">
+        liste donneurs inactifs ({{bloodGivers.length}})
+    </h6>
+    <h6 class="text-uppercase" *ngIf="type === 'enable'">
+        liste donneurs actifs ({{bloodGivers.length}})
+    </h6>
+    <mat-form-field class="mt-1">
+        <mat-label>Recherche Par Prenom</mat-label>
+        <input matInput (keyup)="searchWithFirsName($event)" value="{{searchValue}}" placeholder="Ex. Oumar" #input>
+    </mat-form-field>
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr class="bg-white text-center">
+                <th><mat-icon class="text-danger">photo</mat-icon></th>
+                <th><mat-icon class="text-danger">person</mat-icon></th>
+                <th><mat-icon class="text-danger">contact_phone</mat-icon></th>
+                <th><mat-icon class="text-danger">mail</mat-icon></th>
+                <th><mat-icon class="text-danger">bloodtype</mat-icon></th>
+                <th>Statut</th>
+                <th colspan="2"><mat-icon>build</mat-icon></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center bg-white" *ngFor="let item of bloodGivers">
+                <td *ngIf="item.profil">{{item.profil}}</td>
+                <td *ngIf="!item.profil" class="text-center">
+                    <img *ngIf="item.sex === 'MAN'" style="width: 3em;" class="img-fluid rounded"
+                        mat-card-image src="assets/user.png"
+                        alt="profil utilisateur">
+                    <img *ngIf="item.sex === 'WOMAN'" style="width: 3em;" class="img-fluid rounded"
+                        mat-card-image src="assets/user_f.png"
+                        alt="profil utilisateur">
+                    </td>
+
+                <td>{{item.firstName}} {{item.lastName}} </td>
+                <td>{{item.phoneNumber}}</td>
+                <td>{{item.email}}</td>
+                <td class="text-danger fw-bold">{{item.bloodGroup}}</td>
+                <td *ngIf="!item.status" class="text-danger fw-bold">Inactif</td>
+                <td *ngIf="item.status" class="text-success fw-bold">Actif</td>
+                <td>
+                    <button (click) = "enableOrDisableBloodGiver(item,'Désactivation')"  *ngIf="item.status" mat-button color="warn">desact.</button>
+                    <button (click) = "enableOrDisableBloodGiver(item,'Activation')" *ngIf="!item.status" mat-button color="primary">activ.</button>
+                </td>
+                <td>
+
+                    <button (click)="showDetail(item)" mat-button color="basic"><mat-icon>visibility</mat-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="bloodGivers.length === 0 && type === 'all'" class="alert alert-dark text-center fw-bold">
+        <mat-icon class="text-warning">warning</mat-icon> Liste donneurs vide !
+    </div>
+
+    <div *ngIf="bloodGivers.length === 0 && type === 'enable'" class="alert alert-dark text-center fw-bold">
+        <mat-icon class="text-warning">warning</mat-icon> Pas de donneurs avec statut actif !
+    </div>
+    <div *ngIf="bloodGivers.length === 0 && type === 'disable'" class="alert alert-dark text-center fw-bold">
+        <mat-icon class="text-warning">warning</mat-icon> Pas de donneur avec statut inactif !
+    </div>
+    
+</div>
+
+<div *ngIf="isLoading" class="center mt-5">
+    <mat-spinner color="warn"></mat-spinner>
+</div>

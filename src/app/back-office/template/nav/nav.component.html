@@ -1,0 +1,36 @@
+<div class="bg-white p-5">
+    <button mat-button class="text-danger">
+        <img style="width: 5em;" src="assets/logo.ico" class="rounded img-fluid">
+    </button>
+    <button mat-button [matMenuTriggerFor]="donor" class="text-danger">Donneur <mat-icon
+            class="text-dark">group</mat-icon></button>
+    <mat-menu #donor="matMenu" yPosition="above">
+        <button mat-menu-item (click)="goToListBloodGiver('all')"> Afficher Tout</button>
+        <button mat-menu-item (click)="goToListBloodGiver('enable')"><mat-icon>lock_open</mat-icon> Actives</button>
+        <button mat-menu-item (click)="goToListBloodGiver('disable')"><mat-icon>lock</mat-icon>Inactive</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="pocheDeSang" (click)="findAllBloodType()" class="text-danger">Poches De Sang
+        <mat-icon class="text-dark">bloodtype</mat-icon></button>
+    <mat-menu #pocheDeSang="matMenu" yPosition="below">
+        <button mat-menu-item> <small class="text-dark fw-bold">Afficher Tout</small>
+        </button>
+        <button *ngFor="let item of bloodTypes" mat-menu-item>Groupe<span class="text-danger fw-bold">
+                {{item.name}}</span>
+        </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="bank" class="text-danger">Banques <mat-icon
+            class="text-dark">healing</mat-icon></button>
+    <mat-menu #bank="matMenu" xPosition="before">
+        <button mat-menu-item>Afficher tout</button>
+        <button mat-menu-item><mat-icon>lock_open</mat-icon> Actives</button>
+        <button mat-menu-item><mat-icon>lock</mat-icon>Inactive</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="user" class="text-dark fw-bold text-uppercase"> <mat-icon>person</mat-icon>
+        {{firstname}} {{lastname}}</button>
+    <mat-menu #user="matMenu" xPosition="before">
+        <button mat-menu-item><mat-icon class="text-danger">settings</mat-icon> Profile</button>
+        <button mat-menu-item><mat-icon class="text-danger">power_settings_new</mat-icon> Se d&eacute;connexion</button>
+    </mat-menu>
+</div>
