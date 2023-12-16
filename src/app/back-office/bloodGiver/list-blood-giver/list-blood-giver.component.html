@@ -16,10 +16,12 @@
     <h6 class="text-uppercase" *ngIf="type === 'enable'">
         liste donneurs actifs ({{bloodGivers.length}})
     </h6>
-    <mat-form-field class="mt-1">
-        <mat-label>Recherche Par Prenom</mat-label>
-        <input matInput (keyup)="searchWithFirsName($event)" value="{{searchValue}}" placeholder="Ex. Oumar" #input>
-    </mat-form-field>
+    <div class="container">
+        <mat-form-field class="mt-1">
+            <mat-label>Recherche Par Prenom</mat-label>
+            <input matInput (keyup)="searchWithFirsName($event)" value="{{searchValue}}" placeholder="Ex. Oumar" #input>
+        </mat-form-field>
+    </div>
     <table class="table table-bordered table-sm">
         <thead>
             <tr class="bg-white text-center">
@@ -71,7 +73,6 @@
     <div *ngIf="bloodGivers.length === 0 && type === 'disable'" class="alert alert-dark text-center fw-bold">
         <mat-icon class="text-warning">warning</mat-icon> Pas de donneur avec statut inactif !
     </div>
-    
 </div>
 
 <div *ngIf="isLoading" class="center mt-5">

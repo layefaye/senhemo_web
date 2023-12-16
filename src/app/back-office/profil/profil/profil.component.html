@@ -1,0 +1,29 @@
+<app-nav></app-nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 mt-5">
+            <div class="card">
+                <div class="card-header text-uppercase text-center">
+                    Modifier mot de passe
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="updatePassword()">
+                <!-- Add input fields for current password and new password -->
+                <p>
+                    <label for="currentPassword">Mot de passe actuel</label>
+                    <input class="form-control" type="password" [(ngModel)]="currentPassword" name="currentPassword" placeholder="Mot de passe actuel" required />
+                </p>
+                <p>
+                    <label for="newPassword">Nouveau mot de passe</label>
+                    <input class="form-control" type="password" [(ngModel)]="newPassword" name="newPassword" placeholder="Nouveau mot de passe" required />
+                </p>
+                <p class="text-center">
+                    <button class="btn btn-dark" type="submit">Mettre à jour</button>
+                </p>
+              </form>  
+                </div>
+            </div>
+                  
+        </div>
+    </div>
+</div>

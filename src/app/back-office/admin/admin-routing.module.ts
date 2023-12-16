@@ -5,6 +5,7 @@ import { ListBloodGiverComponent } from '../bloodGiver/list-blood-giver/list-blo
 import { DetailBloodGiverComponent } from '../bloodGiver/detail-blood-giver/detail-blood-giver.component';
 import { ShowDonateComponent } from '../bloodGiver/show-donate/show-donate.component';
 import { ListBankComponent } from '../bank/list-bank/list-bank.component';
+import { ProfilComponent } from '../profil/profil/profil.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent,  },
@@ -13,9 +14,11 @@ const routes: Routes = [
   {path:'blood-givers/list-blood-giver/:type', component: ListBloodGiverComponent},
   {path: 'blood-givers/detail-blood-giver/:id', component: DetailBloodGiverComponent},
   {path: 'blood-givers/show-donate/:id/:bloodGroup', component: ShowDonateComponent},
+  {path: 'profil', component: ProfilComponent},
+
 
   // Banque
-  {path: 'banks/bank/:type', component: ListBankComponent}
+  {path: 'banks/list-bank/:type', component: ListBankComponent}
 
   
 ];

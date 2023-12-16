@@ -1,1 +1,80 @@
-<p>list-bank works!</p>
+<app-nav></app-nav>
+<div *ngIf="!isLoading" class="container mt-5">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h6 class="text-uppercase" *ngIf="type === 'all'">
+                liste banques ({{banks.length}})
+            </h6>
+        </div>
+        <div class="col-sm-6 text-end">
+                <button mat-button (click)="showMap(banks)" ><mat-icon class="text-danger">map</mat-icon> Map</button>
+        </div>
+    </div>
+    <h6 class="text-uppercase" *ngIf="type === 'disable'">
+        liste banques inactifs ({{banks.length}})
+    </h6>
+    <h6 class="text-uppercase" *ngIf="type === 'enable'">
+        liste banques actifs ({{banks.length}})
+    </h6>
+    <div class="container">
+        <mat-form-field class="mt-1">
+            <mat-label>Recherche  Par Nom </mat-label>
+            <input matInput (keyup)="searchWithFirsName($event)" value="{{searchValue}}" placeholder="Ex. Hôpital Aristide Le Dantec" #input>
+        </mat-form-field>
+    </div>
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr class="bg-white text-center">
+                <th>Nom<mat-icon class="text-danger"></mat-icon></th>
+                <th>Mail<mat-icon class="text-danger"></mat-icon></th>
+                <th>Latitude<mat-icon class="text-danger"></mat-icon></th>
+                <th>Longitude<mat-icon class="text-danger"></mat-icon></th>
+                <!-- <th><mat-icon class="text-danger">contact_phone</mat-icon></th>
+                <th><mat-icon class="text-danger">mail</mat-icon></th>
+                <th><mat-icon class="text-danger">bloodtype</mat-icon></th> -->
+                <th>Statut</th>
+                <th colspan="2"><mat-icon>build</mat-icon></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="text-center bg-white" *ngFor="let item of banks">
+               
+
+                <td>{{item['name']}} </td>
+                <td>{{item['email']}}</td>
+                <td>{{item['latitude']}}</td>
+                <td>{{item['longitude']}}</td>
+                
+                <td *ngIf="!item['status']" class="text-danger fw-bold">Inactif</td>
+                <td *ngIf="item['status']" class="text-success fw-bold">Actif</td>
+                <td>
+                    <button   *ngIf="item.status" mat-button color="warn">desact.</button>
+                    <button (click)="enableBank(item['id'], type)"  *ngIf="!item.status" mat-button color="primary">activ.</button>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="banks.length === 0 && type === 'all'" class="alert alert-dark text-center fw-bold">
+        <mat-icon class="text-warning">warning</mat-icon> Liste donneurs vide !
+    </div>
+
+    <div *ngIf="banks.length === 0 && type === 'enable'" class="alert alert-dark text-center fw-bold">
+        <mat-icon class="text-warning">warning</mat-icon> Pas de donneurs avec statut actif !
+    </div>
+    <div *ngIf="banks.length === 0 && type === 'disable'" class="alert alert-dark text-center fw-bold">
+        <mat-icon class="text-warning">warning</mat-icon> Pas de donneur avec statut inactif !
+    </div>
+    
+
+</div>
+
+<div class="text-center">
+    <div *ngIf="isLoading" class=" mt-5">
+        hello
+        <mat-spinner color="warn"></mat-spinner>
+    </div>
+</div>
+
+

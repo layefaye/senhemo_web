@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BloodGiverService {
+  
   apiUrl = "http://localhost:7004/api/senhemo/v1/bloodgivers"
   constructor(private http: HttpClient) {
   }
@@ -58,5 +59,13 @@ export class BloodGiverService {
     return this.http.get(this.apiUrl+"/bloodbags/"+id)
   }
 
+  updatePassword(body: {
+    "oldPass": string; 
+    "newPass": string;
+    "id": any;
+  }) {
+    
+    return this.http.post("http://127.0.0.1:7001/api/senhemo/v1/admins/changepassword", body)
+  }
 
 }

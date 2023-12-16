@@ -10,18 +10,27 @@ import * as Leaflet from 'leaflet';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+  mapType = "";
   ngOnInit(): void {
+    if (sessionStorage.getItem("mapType") != null) {
+        this.mapType = sessionStorage.getItem("mapType") ?? '';
+    }
+    
     Leaflet.Icon.Default.mergeOptions({
       iconRetinaUrl: 'assets/marker-icon-2x.png',
       iconUrl: 'assets/marker-icon.png',
       shadowUrl: 'assets/marker-shadow.png'
-    });
+    
 
+    });
+    this.map = Leaflet.map('leaflet-map', this.options)
+    
  
     this.initMarkers()
   }
 
   map!: Leaflet.Map;
+  
   markers: Leaflet.Marker[] = [];
   options = {
     layers: [
@@ -29,30 +38,46 @@ export class MapComponent implements OnInit {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       })
     ],
-    zoom: 13,
-    center: { lat: 14.497401, lng: -14.452362 }
+    zoom: 6,
+    center: { lat: 14.499454, lng: -14.445561 }
   }
 
   /**
    * les marqueur qui vont correspondre a des cordonnee geographique en loccurence latitude et longitudes
    */
   initMarkers() {
-
-    this.data.forEach((element: any) => {
-      const marker = this.generateMarker(
-        {
-          position: { lat: +element.latitude, lng: +element.longitude },
-          draggable: true
-        }
-        , element.id);
-        if (element.sex === "MAN") {
-          marker.addTo(this.map).bindPopup(`<div class='text-center fw-bold text-uppercase'>  ${element.status ? `<div class='spinner-grow text-success' role="status"></div>` :`<div class='spinner-grow text-danger' role="status"></div>`}<br/> <img class='img-fluid img-responsive' style="width: 5em"  src='assets/user.png'> <br/> ${element.firstName}  ${element.lastName}</div> `);
-        } else {
-          marker.addTo(this.map).bindPopup(`<div class='text-center fw-bold text-uppercase'>  ${element.status ? `<div class='spinner-grow text-success' role="status"></div>` :`<div class='spinner-grow text-danger' role="status"></div>`}<br/> <img class='img-fluid img-responsive' style="width: 5em"  src='assets/user_f.png'> <br/> ${element.firstName}  ${element.lastName}</div> `);
-        }
-        this.map.panTo({lat: element.latitude, lng: element.longitude});
-        this.markers.push(marker)
-    });
+    if (this.mapType === 'bank') {
+      this.data.forEach((element: any) => {
+        const marker = this.generateMarker(
+          {
+            position: { lat: +element.latitude, lng: +element.longitude },
+            draggable: true
+          }
+          , element.id);
+          marker.addTo(this.map).bindPopup(`<div class='text-center fw-bold text-uppercase'>  ${element.status ? `<div class='spinner-grow text-success' role="status"></div>` :`<div class='spinner-grow text-danger' role="status"></div>`}<br/> <img class='img-fluid img-responsive' style="width: 5em"  src='assets/bank.png'> <br/> ${element.name} </div> `);
+        
+          this.map.panTo({lat: element.latitude, lng: element.longitude});
+          this.markers.push(marker)
+      });
+    }else{
+      this.data.forEach((element: any) => {
+        const marker = this.generateMarker(
+          {
+            position: { lat: +element.latitude, lng: +element.longitude },
+            draggable: true
+          }
+          , element.id);
+          if (element.sex === "MAN") {
+            marker.addTo(this.map).bindPopup(`<div class='text-center fw-bold text-uppercase'>  ${element.status ? `<div class='spinner-grow text-success' role="status"></div>` :`<div class='spinner-grow text-danger' role="status"></div>`}<br/> <img class='img-fluid img-responsive' style="width: 5em"  src='assets/user.png'> <br/> ${element.firstName}  ${element.lastName}</div> `);
+          } else {
+            marker.addTo(this.map).bindPopup(`<div class='text-center fw-bold text-uppercase'>  ${element.status ? `<div class='spinner-grow text-success' role="status"></div>` :`<div class='spinner-grow text-danger' role="status"></div>`}<br/> <img class='img-fluid img-responsive' style="width: 5em"  src='assets/user_f.png'> <br/> ${element.firstName}  ${element.lastName}</div> `);
+          }
+          this.map.panTo({lat: element.latitude, lng: element.longitude});
+          this.markers.push(marker)
+      });
+    }
+    
+    
   }
 
   generateMarker(data: any, index: number) {
@@ -67,15 +92,12 @@ export class MapComponent implements OnInit {
   }
 
   mapClicked($event: any) {
-    console.log($event.latlng.lat, $event.latlng.lng);
   }
 
   markerClicked($event: any, index: number) {
-    console.log($event.latlng.lat, $event.latlng.lng);
   }
 
   markerDragEnd($event: any, index: number) {
-    console.log($event.target.getLatLng());
   }
 
 

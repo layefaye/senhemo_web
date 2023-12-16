@@ -62,11 +62,11 @@ export class LoginComponent implements OnInit {
       next: ((res) => {
         if (res) {
           this.admin = res
-          localStorage.setItem("id", this.admin.id)
-          localStorage.setItem("email", this.admin.email)
-          localStorage.setItem("lastname", this.admin.lastname)
-          localStorage.setItem("firstname", this.admin.firstname)
-          this.router.navigate(['/admin/'])
+          sessionStorage.setItem("id", this.admin.id)
+          sessionStorage.setItem("email", this.admin.email)
+          sessionStorage.setItem("lastname", this.admin.lastname)
+          sessionStorage.setItem("firstname", this.admin.firstname)
+          this.router.navigate(['/admin/blood-givers/list-blood-giver/all'])
         } else {
           this.toastr.error("Mail et/ou mot de passe incorrect.", "Authentification");
         }

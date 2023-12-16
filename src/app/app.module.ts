@@ -33,6 +33,7 @@ import { ServerErrorInterceptor } from './interceptors/server-error.interceptor'
 import { MapComponent } from './shared/map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ListBankComponent } from './back-office/bank/list-bank/list-bank.component';
+import { ProfilComponent } from './back-office/profil/profil/profil.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ListBankComponent } from './back-office/bank/list-bank/list-bank.compon
     DetailBloodBagComponent,
     MapComponent,
     ListBankComponent,
+    ProfilComponent,
     
   ],
   imports: [

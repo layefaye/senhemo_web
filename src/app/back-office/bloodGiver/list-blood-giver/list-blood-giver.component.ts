@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { flatMap } from 'rxjs';
 import { MapComponent } from 'src/app/shared/map/map.component';
+import { MapData } from '../../models/mapData.interface';
 
 @Component({
   selector: 'app-list-blood-giver',
@@ -110,6 +111,7 @@ export class ListBloodGiverComponent implements OnInit {
 
 
   showMap(data: Object){
+    sessionStorage.setItem("mapType","donor")
     let dialogRef = this.dialog.open(MapComponent, {
       width: '1000px',
       data: data
@@ -150,7 +152,5 @@ export class ListBloodGiverComponent implements OnInit {
 
 
 }
-
-
 
 
